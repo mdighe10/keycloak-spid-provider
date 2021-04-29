@@ -28,6 +28,7 @@ import org.keycloak.saml.SamlProtocolExtensionsAwareBuilder;
 import org.keycloak.saml.processing.api.saml.v2.request.SAML2Request;
 import org.keycloak.saml.processing.core.saml.v2.common.IDGenerator;
 import org.keycloak.saml.processing.core.saml.v2.util.XMLTimeUtil;
+import org.keycloak.sessions.AuthenticationSessionModel;
 import org.w3c.dom.Document;
 
 import java.net.URI;
@@ -66,6 +67,10 @@ public class SpidSAML2AuthnRequestBuilder implements SamlProtocolExtensionsAware
 
     public SpidSAML2AuthnRequestBuilder() {
         this.authnRequestType = new AuthnRequestType(IDGenerator.create("ID_"), XMLTimeUtil.getIssueInstant());
+    }
+
+    public String getRequestID(){
+        return authnRequestType.getID();
     }
 
     public SpidSAML2AuthnRequestBuilder assertionConsumerUrl(String assertionConsumerUrl) {
